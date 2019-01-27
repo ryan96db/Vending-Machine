@@ -1,11 +1,11 @@
 #ifndef VMFUNCTIONHEADER_H_INCLUDED
 #define VMFUNCTIONHEADER_H_INCLUDED
-bool isiterror(char user);
+bool isItError(char user);
 int randomize();
-bool validitem(char user);
-std::string getitem(char user);
+bool validItem(char user);
+std::string getItem(char user);
 double prices(char item);
-bool correctmoney (double user);
+bool correctMoney (double user);
 
 
 #endif // VMFUNCTIONHEADER_H_INCLUDED

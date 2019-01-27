@@ -4,24 +4,38 @@
 
 using namespace std;
 
-void moneyamount (double enter)
+void moneyAmount (double enter)
 {
-    double entnum = 0;
-    entnum += enter;
-    cout << "Amount entered: " << entnum << endl;
+    double entNum = 0;
+    entNum += enter;
+    cout << "Amount entered: $" << entNum << endl;
 }
+
+class VendingItem {
+
+        public:
+
+        string name;
+
+        double price;
+
+};
+
 
 int main()
 
 {
 
+    VendingItem v1;
+    v1.name = "Cool Ranch Doritos";
 
+    cout << v1.name << endl;
 
-    bool wantstobuy = false;
-    double mymoney;
-    char spendmore;
+    bool wantsToBuy = false;
+    double myMoney;
+    char spendMore;
     double track = 0;
-    bool dollabill;
+    bool dollaBill;
     bool cancel;
 
     char buy;
@@ -30,47 +44,46 @@ int main()
 
     //Have user choose yes or no to use vending machine.
 
-    bool error = isiterror(buy);
+    bool error = isItError(buy);
     while (error == true)
     {
         cout << "Invalid entry. Try again.";
         cin>> buy;
-        error = isiterror(buy);
+        error = isItError(buy);
     }
 
 if (buy == '1')
     //enter your money
     {
-        wantstobuy = true;
+        wantsToBuy = true;
 
-    while (wantstobuy == true)
+    while (wantsToBuy == true)
     {
 
     cout << "Enter your money. We accept up to $10: ";
-    cin >> mymoney;
-    dollabill = correctmoney (mymoney);
+    cin >> myMoney;
+    dollaBill = correctMoney (myMoney);
     //Checks to see if valid money was entered (pennies, nickels, etc.).
 
-                while (dollabill == false)
+                while (dollaBill == false)
                 {
                     cout << "Money entered is not valid. Try again.\n" << endl;
                     cout << "Enter your money. We accept up to $10: ";
-                    cin >> mymoney;
-                    dollabill = correctmoney (mymoney);
-
+                    cin >> myMoney;
+                    dollaBill = correctMoney(myMoney);
 
                 }
 
     //Keeps track of how much money you entered.
-    track += mymoney;
-    moneyamount (track);
+    track += myMoney;
+    moneyAmount (track);
 
     //Breaks loop if amount of money entered exceeds $10.
 
     if (track >=10)
     {
         cout << "That's enough money. Buy something!\n" << endl;
-        spendmore = '0';
+        spendMore = '0';
 
     }
 
@@ -80,12 +93,12 @@ if (buy == '1')
 
 
     cout << "Enter more? (Enter 1 for yes or 0 for no)";
-    cin >> spendmore;
+    cin >> spendMore;
 
     }
 
-    if (spendmore == '0')
-        wantstobuy = false;
+    if (spendMore == '0')
+        wantsToBuy = false;
 
 
     }
@@ -94,7 +107,7 @@ if (buy == '1')
 
 
     //displays items
-    string stuff[10];
+    string stuff[8];
     stuff[0] = "What would you like?";
     stuff[1] = "1 - Cool Ranch Doritos $1.50";
     stuff[2] = "2 - Cheez-Its $1.35";
@@ -119,69 +132,66 @@ if (buy == '1')
 
 
     // Has user choose what item they want.
-    char whatitem;
+    char whatItem;
     //Gives user change back.
     double change;
 
     cout << "Enter the number of the snack that you want to buy: ";
-    cin >> whatitem;
-    bool goodentry = true;
+    cin >> whatItem;
+    bool goodEntry = true;
 
-    goodentry = validitem(whatitem);
+    goodEntry = validItem(whatItem);
 
     //Checks to see if item entry was valid.
-    while (goodentry == false)
+    while (goodEntry == false)
     {
         cout <<"Invalid entry. Try again. ";
         cout << "Enter the number of the snack that you want to buy: ";
-        cin >> whatitem;
-        goodentry = validitem(whatitem);
+        cin >> whatItem;
+        goodEntry = validItem(whatItem);
 
     }
-
 
     int random;
 
-    //Randomizes the item that you choose.
+    //Randomizes the amount left of the item you chose.
     random = randomize();
-    bool outofstock;
+    bool outOfStock;
 
     if (random == 0)
     {
-        outofstock = true;
+        outOfStock = true;
     }
+
     else
     {
-        outofstock = false;
+        outOfStock = false;
     }
 
-
-
-
     //Pay money
-    double howmuch = prices(whatitem);
+    double howMuch = prices(whatItem);
 
 
     //Transaction. If not enough money or out of stock, have user enter more money, choose another item, or give user money back.
 
-    while (track<howmuch || outofstock == true)
+    while (track<howMuch || outOfStock == true)
     {
 
-        char nogo = '0';
+        char noGo = '0';
 
-        if (track < howmuch)
+        if (track < howMuch)
         {
             cout << "Insufficient funds. Press 1 to enter more money, 2 to cancel transaction, or 3 to choose another item: ";
-            cin >> nogo;
+            cin >> noGo;
             //Cancels transaction.
-            if (nogo == '2')
+            if (noGo == '2')
             {change = track;
             cout << "Your change is: $" << change << ".\n\nGoodbye!" << endl;
             break;
             }
 
         }
-        else if (outofstock == true)
+        else if (outOfStock == true)
         {
 
             cout << "Sorry, this item is out of stock. Press 1 to enter more money, 2 to cancel transaction, or 3 to choose another item: ";
@@ -189,34 +199,34 @@ if (buy == '1')
 
 
         //If user enters more money
-        if (nogo == '1')
+        if (noGo == '1')
         {
-            wantstobuy = true;
-            while (wantstobuy == true)
+            wantsToBuy = true;
+            while (wantsToBuy == true)
             {
 
             cout << "Enter your money. We accept up to $10: ";
-            cin >> mymoney;
-            dollabill = correctmoney (mymoney);
+            cin >> myMoney;
+            dollaBill = correctMoney (myMoney);
 
-             while (dollabill == false)
+             while (dollaBill == false)
                 {
                     cout << "Money entered is not valid. Try again.\n" << endl;
                     cout << "Enter your money. We accept up to $10: ";
-                    cin >> mymoney;
-                    dollabill = correctmoney (mymoney);
+                    cin >> myMoney;
+                    dollaBill = correctMoney (myMoney);
 
 
                 }
 
-            track += mymoney;
-            moneyamount (track);
+            track += myMoney;
+            moneyAmount (track);
 
 
             if (track >=10)
             {
         cout << "That's enough money. Buy something!\n" << endl;
-        spendmore = '0';
+        spendMore = '0';
 
             }
 
@@ -225,10 +235,10 @@ if (buy == '1')
 
 
             cout << "Enter more? (Enter 1 for yes or 0 for no)";
-            cin >> spendmore;
-            if (spendmore == '0')
+            cin >> spendMore;
+            if (spendMore == '0')
             {
-                wantstobuy = false;
+                wantsToBuy = false;
             }
 
                 }
@@ -242,23 +252,8 @@ if (buy == '1')
     {
 
         //Displays items if user enters more money or if they choose another item with the money already entered.
-        if (nogo == '1' || nogo == '3')
+        if (noGo == '1' || noGo == '3')
               {
-
-               string stuff[8];
-                stuff[0] = "What would you like?";
-                stuff[1] = "1 - Cool Ranch Doritos $1.50";
-                stuff[2] = "2 - Cheez-Its $1.35";
-                stuff[3] = "3 - Pretzels $1.35";
-                stuff[4] = "4 - Animal Crackers $1.35";
-                stuff[5] = "5 - Baked Lays $1.50";
-                stuff[6] = "6 - Snickers $1.25";
-                stuff[7] = "7 - Peanut M&Ms $1.25";
-                stuff[8] = "8 - Twix $1.00";
-
-
-
-
 
                 for (int a = 0; a<=8; a++)
                 {
@@ -269,31 +264,26 @@ if (buy == '1')
 
 
                 cout << "Enter the number of the snack that you want to buy: ";
-                cin >> whatitem;
+                cin >> whatItem;
 
 
-                goodentry = validitem(whatitem);
+                goodEntry = validItem(whatItem);
 
-                while (goodentry == false)
+                while (goodEntry == false)
                 {
                     cout <<"Invalid entry. Try again. ";
                     cout << "Enter the number of the snack that you want to buy: ";
-                    cin >> whatitem;
-                    goodentry = validitem(whatitem);
+                    cin >> whatItem;
+                    goodEntry = validItem(whatItem);
 
                 }
 
 
-
-
-
                 //Pay money
 
-                howmuch = prices(whatitem);
-                if (track>= howmuch)
+                howMuch = prices(whatItem);
+                if (track>= howMuch)
                     break;
-
-
 
               }
                 // Sets change back equal to amount of money put in if user decides to cancel transaction.
@@ -306,18 +296,11 @@ if (buy == '1')
     }
 
     //Goes through with transaction.
-    if (track>= howmuch)
+    if (track>= howMuch)
     {
 
 
-    howmuch = prices(whatitem);
-
-
-
-
-
-
-
+    howMuch = prices(whatItem);
 
          //Playful message for if the user gets the last of an item.
         if (random == 1)
@@ -329,34 +312,20 @@ if (buy == '1')
         {cout << "There are "<< random << " of this item left in stock today.\n" << endl;}
 
 
-        cout << "Your price is " << howmuch << ".\n" << endl;
+        cout << "Your price is " << howMuch << ".\n" << endl;
         //gives you the item
-        string whatuget = getitem(whatitem);
-        cout << whatuget << endl;
-       change = track - howmuch;
+        string whatUGet = getItem(whatItem);
+        cout << whatUGet << endl;
+       change = track - howMuch;
         cout << "Your change is: " << change << ".\n\nGoodbye!" << endl;
     }
 
-
-
     }
-
 
 
 // If user decides not to use vending machine at the beginning.
 else
     cout << "Goodbye!" << endl;
-
-
-
-
-
-
-
-
-
-
-
 
 
 
