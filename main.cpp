@@ -1,5 +1,6 @@
 #include <iostream>
 #include "vmfunctionheader.h"
+#include <array>
 
 
 using namespace std;
@@ -8,16 +9,29 @@ void moneyAmount (double enter)
 {
     double entNum = 0;
     entNum += enter;
-    cout << "Amount entered: $" << entNum << endl;
+    cout << "Amount entered: " << entNum << endl;
 }
 
 class VendingItem {
+    string name;
+    double price;
 
-        public:
+public:
 
-        string name;
+    //Parameterized Constructor
+    VendingItem(string itemName, double itemPrice) {
 
-        double price;
+        name = itemName;
+        price = itemPrice;
+    }
+
+    string getName() {
+        return name;
+    }
+
+    double getPrice() {
+    return price;
+    }
 
 };
 
@@ -25,11 +39,6 @@ class VendingItem {
 int main()
 
 {
-
-    VendingItem v1;
-    v1.name = "Cool Ranch Doritos";
-
-    cout << v1.name << endl;
 
     bool wantsToBuy = false;
     double myMoney;
@@ -70,7 +79,8 @@ if (buy == '1')
                     cout << "Money entered is not valid. Try again.\n" << endl;
                     cout << "Enter your money. We accept up to $10: ";
                     cin >> myMoney;
-                    dollaBill = correctMoney(myMoney);
+                    dollaBill = correctMoney (myMoney);
+
 
                 }
 
@@ -103,28 +113,26 @@ if (buy == '1')
 
     }
 
+    VendingItem v1("Cool Ranch Doritos", 1.50);
+    VendingItem v2("Cheez-Its", 1.35);
+    VendingItem v3("Pretzels", 1.35);
+    VendingItem v4("Animal Crackers", 1.35);
+    VendingItem v5("Baked Lays", 1.50);
+    VendingItem v6("Snickers", 1.25);
+    VendingItem v7("Peanut M&Ms", 1.25);
+    VendingItem v8("Twix", 1.00);
+
+    array<VendingItem, 8> itemList = {v1, v2, v3, v4, v5, v6, v7, v8};
+    int vendingNumber;
 
 
-
+    cout << "What would you like?" << endl;
     //displays items
-    string stuff[8];
-    stuff[0] = "What would you like?";
-    stuff[1] = "1 - Cool Ranch Doritos $1.50";
-    stuff[2] = "2 - Cheez-Its $1.35";
-    stuff[3] = "3 - Pretzels $1.35";
-    stuff[4] = "4 - Animal Crackers $1.35";
-    stuff[5] = "5 - Baked Lays $1.50";
-    stuff[6] = "6 - Snickers $1.25";
-    stuff[7] = "7 - Peanut M&Ms $1.25";
-    stuff[8] = "8 - Twix $1.00";
 
-
-
-
-    for (int a = 0; a<=8; a++)
+    for (int x = 0; x<itemList.size(); x++)
     {
-
-        cout << stuff[a] << endl;
+        vendingNumber = x + 1;
+        cout << vendingNumber << " - " << itemList[x].getName() << ": $" << itemList[x].getPrice() << endl;
     }
 
 
@@ -152,9 +160,10 @@ if (buy == '1')
 
     }
 
+
     int random;
 
-    //Randomizes the amount left of the item you chose.
+    //Randomizes the item that you choose.
     random = randomize();
     bool outOfStock;
 
@@ -162,11 +171,11 @@ if (buy == '1')
     {
         outOfStock = true;
     }
-
     else
     {
         outOfStock = false;
     }
+
 
     //Pay money
     double howMuch = prices(whatItem);
@@ -255,12 +264,14 @@ if (buy == '1')
         if (noGo == '1' || noGo == '3')
               {
 
-                for (int a = 0; a<=8; a++)
+                cout << "What would you like?" << endl;
+                //displays items
+
+                for (int x = 0; x<itemList.size(); x++)
                 {
-
-                    cout << stuff[a] << endl;
+                    vendingNumber = x + 1;
+                    cout << vendingNumber << " - " << itemList[x].getName() << ": $" << itemList[x].getPrice() << endl;
                 }
-
 
 
                 cout << "Enter the number of the snack that you want to buy: ";
@@ -278,7 +289,6 @@ if (buy == '1')
 
                 }
 
-
                 //Pay money
 
                 howMuch = prices(whatItem);
@@ -289,10 +299,6 @@ if (buy == '1')
                 // Sets change back equal to amount of money put in if user decides to cancel transaction.
     }
 
-
-
-
-
     }
 
     //Goes through with transaction.
@@ -301,6 +307,9 @@ if (buy == '1')
 
 
     howMuch = prices(whatItem);
+
+
+
 
          //Playful message for if the user gets the last of an item.
         if (random == 1)
@@ -312,22 +321,23 @@ if (buy == '1')
         {cout << "There are "<< random << " of this item left in stock today.\n" << endl;}
 
 
-        cout << "Your price is " << howMuch << ".\n" << endl;
+        cout << "Your price is $" << howMuch << ".\n" << endl;
         //gives you the item
         string whatUGet = getItem(whatItem);
         cout << whatUGet << endl;
        change = track - howMuch;
-        cout << "Your change is: " << change << ".\n\nGoodbye!" << endl;
+        cout << "Your change is: $" << change << ".\n\nGoodbye!" << endl;
     }
 
+
+
     }
+
 
 
 // If user decides not to use vending machine at the beginning.
 else
     cout << "Goodbye!" << endl;
-
-
 
     return 0;
 

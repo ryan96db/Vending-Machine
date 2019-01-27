@@ -64,7 +64,6 @@ bool correctMoney (double user)
 
 
 }
-
 bool validItem(char user)
 {
 
@@ -113,18 +112,20 @@ std::string getItem(char user)
             return "You received the Peanut M&Ms!";
         case '8':
             return "You received the Twix!";
-        default:
-            return "";
+
+
+
+
 
     }
-
-
 }
 
 double prices(char item)
     {
     switch(item)
     {
+
+
 
         case '1':
             return 1.5;
@@ -142,13 +143,11 @@ double prices(char item)
             return 1.25;
         case '8':
             return 1.00;
-         default:
-            return 0.0;
 
+    }
     }
 
 
-    }
 
 
 
